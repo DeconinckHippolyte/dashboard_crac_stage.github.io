@@ -1,0 +1,416 @@
+
+body {
+	width: 100%;
+	height: 100%;
+	background-color: #e8e8e8;
+	font-family: 'Calibri', sans-serif;
+    color: #2c2c2c;
+}
+
+
+
+/* mise en forme du DIV */
+#mapid{
+	position: absolute;
+    border: 1px solid gray; /* Cette ligne ajoute un contour gris */
+    top: 10%;
+    bottom: 10px;
+    left: 19.5%;
+    right: 13.5%;
+    z-index: 1;
+}
+
+
+#containerFiltre {
+    background-color: rgb(247, 247, 247);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10%;
+    bottom: 10px;
+    left: 87%;
+    right: 10px;
+    z-index: 1;
+    justify-content: space-between; /* Ajouté pour garder les boutons en bas */
+    border: 1px solid gray; /* Cette ligne ajoute un contour gris */
+}
+
+.filtre-container {
+	overflow-y: auto; /* Permet le défilement lorsque le contenu est trop grand */
+	margin: 5px;
+	width: 100%;
+	max-height: calc(100% - 70px); /* Ajuster en fonction de la hauteur de votre div de boutons */
+}
+
+.filtre{
+	margin-top: 15px;
+	width: 100%;
+}
+
+.filtre.filtre-boutons {
+	display: flex;
+	flex-direction: column;
+	gap: 10px; 
+	align-items: center;
+    margin-bottom: 10px;
+}
+
+.filtre-button {
+	padding: 10px 10px; 
+	background-color: #0020609b; 
+	color: rgb(255, 255, 255); 
+	border: none; 
+	border-radius: 30px; 
+	cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+}
+
+.filtre-button:hover {
+	background-color: #002060e8; 
+}
+
+.select2-container {
+	width: 93% !important;
+}
+
+.filtre h4{
+	margin: 5px;
+}
+
+
+#containerHist {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10%;
+    bottom: 10px;
+    left: 10px;
+    right: 81%;
+    z-index: 1;
+}
+
+
+
+.boxHist {
+    background-color: rgb(247, 247, 247);
+    border: 1px solid gray; /* Cette ligne ajoute un contour gris */
+    height: 30%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Pas de marge en haut pour le premier élément */
+.boxHist:first-child {
+    margin-top: 0;
+}
+
+/* Pas de marge en bas pour le dernier élément */
+.boxHist:last-child {
+    margin-bottom: 0;
+}
+
+
+
+.boxHist p {
+    margin-top: 1px; 
+    margin-bottom: 1px; 
+}
+
+#hist5{
+    position: relative;
+    height: 15%;
+}
+
+
+#nbreHom {
+    position: absolute;
+    display: flex;
+    align-items: flex-end; /* Positionne le contenu au bas de la div */
+    justify-content: center; /* Centre le contenu horizontalement */
+    height: 100%; /* Assure que #nbreHom prend toute la hauteur de son conteneur parent */
+}
+
+#nbreHom h2 {
+    margin: 0;
+    color: #002060;
+    font-size: 50px;
+}
+
+#hist2{
+    height: 35%;
+}
+
+#hist3{
+    height: 35%;
+}
+
+#hist4{
+    height: 15%;
+}
+
+#hist2_canvas {
+    width: 100%;
+    height: 100%;
+}
+
+#hist3_canvas {
+    width: 100%;
+    height: 100%;
+}
+
+#hist4_canvas {
+    width: 100%;
+    height: 100%;
+}
+
+
+#hist5_canvas {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+}
+
+
+@media (max-width: 768px) {
+    #mapid{
+        position: absolute;
+        top: 10%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+    #containerHist {
+        display: none;
+    }
+}
+
+#header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    height: 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    padding-left: 2%;
+    padding-right: 2%;
+    box-sizing: border-box;
+    z-index: 2;
+    background-color: rgb(247, 247, 247);
+    border: 1px solid gray; /* Cette ligne ajoute un contour gris */
+}
+
+
+ 
+#header-title {
+    font-size: 2.5vw;  /* Ajustez le chiffre pour modifier la taille de la police */
+    text-align: center;
+    color: #002060;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+
+#containAbout{
+    display: none;
+    position: fixed;
+    width: 100%; 
+    height: 100%;
+    background-color: #00206048;
+    z-index: 99;
+}
+
+
+#about {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%; 
+    height: 70%;
+    border-radius: 20px;
+    background-color: white;
+    padding: 20px;
+    z-index: 100;
+    box-sizing: border-box;
+    overflow-y: auto; /* Ajouté pour permettre le défilement si le contenu est trop grand */
+    padding-top: 30px;
+}
+
+.closeAbout {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.scrollable-content {
+    height: 95%; /* Hauteur de la partie déroulante */
+    overflow-y: auto; /* Permettre le défilement si le contenu dépasse */
+}
+
+#about-button {
+    background-color: transparent;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    height: 70%;
+}
+
+#about-button:hover .st0 {
+    opacity: 0.70;
+}
+
+
+#close-about {
+    text-align: center; /* Centrer le texte du bouton */
+    align-self: center;  /* Ceci centre le bouton horizontalement */
+    margin-top: auto;  /* Ceci pousse le bouton vers le bas */
+}
+
+
+/* mise en forme des popups de la carte Leaflet */
+.leaflet-popup-tip,
+.leaflet-popup-content-wrapper {
+    background: #5d79b1;
+    color: #ffffff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#about h2 {
+    text-align: center;
+}
+
+
+leaflet-control-layers {
+    background: none;
+    box-shadow: none;
+}
+
+.button {
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+
+
+
+.easy-button-button {
+    background-image: url("../img/icon_centrage.png");
+    background-size: 20px 20px;
+}
+
+#world-button .easy-button-button {
+    background-image: url("../img/icon_decentrage.png");
+    background-size: 20px 20px;
+}
+
+.couche-icon{
+    background-color: white;
+    background-image: url("../img/icon_couche.png");
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: 40px 40px;
+    border: 1px solid black;
+    border-radius: 5px; 
+    width: 50px;
+    height: 50px;
+}
+
+
+.center-text {
+    text-align: center;
+}
+
+
+.leaflet-tooltip {
+    color: rgb(255, 255, 255) !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+
+.layer-switcher {
+    background-image: url('../img/icon_switch_homLayer.png');
+    background-size: 40px 40px;
+    background-color: rgb(255, 255, 255);
+    width: 45px;
+    height: 45px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.info {
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.def-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00206048;
+    z-index: 99; /* Situé au-dessus des autres éléments */
+}
+
+.def-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    z-index: 100; /* Encore au-dessus du fond */
+    max-width: 80%; /* Pour s'assurer qu'il ne devient pas trop grand */
+    max-height: 60%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    overflow-y: auto; /* Ajouté pour permettre le défilement si le contenu est trop grand */
+
+}
+
+.def-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.hidden {
+    display: none;
+}

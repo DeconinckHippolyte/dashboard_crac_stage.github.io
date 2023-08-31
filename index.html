@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="icon" href="logo_DCPJ.png">
+	<title>Carte des homicides </title>
+    
+	<!-- appelle la librairie javascript Leaflet et le fichier CSS Leaflet -->	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<script type="text/javascript" src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>	
+	
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch/assets/css/leaflet.css">
+	<script src="https://unpkg.com/leaflet-geosearch/dist/geosearch.umd.js"></script>
+	
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-doughnutlabel"></script>
+	
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
+
+	
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	
+	<!-- lien vers mon fichier CSS -->
+	<link rel="stylesheet" href="style.css" />
+	
+
+	<!-- jQuery - indispensable pour utiliser les fichiers geojson -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>	
+	
+</head>
+ 
+<body onload="initialize()">
+	
+
+	<div id="header">
+		<img id="logo" src="logo_DNPJ.png" style="width: auto; height: 80%;">
+		<h1 id="header-title">CARTE DES HOMICIDES 2019-2021 <span style="font-size: 1.5vw;">(Données Non-Réelles)</span></h1>
+ 
+		<button id="about-button">
+				<?xml version="1.0" encoding="utf-8"?>
+				<!-- Generator: Adobe Illustrator 27.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+				<svg width="100%" height="100%" version="1.1" id="Calque_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					viewBox="0 0 512.5 175.4" style="enable-background:new 0 0 512.5 175.4;" xml:space="preserve">
+					<style type="text/css">
+						.st0{opacity:0.39;fill:#212C56;stroke:#212C56;stroke-width:4.9871;stroke-miterlimit:10;enable-background:new    ;}
+						.st1{fill:#F6F6F6;}
+						.st2{fill:none;stroke:#212C56;stroke-width:4.9871;stroke-miterlimit:10;}
+						.st3{fill:#F6F6F6;stroke:#212C56;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+					</style>
+					<path class="st0" d="M466.8,149.8H42.9c-19.6,0-35.6-15.9-35.6-35.6V72.9c0-19.6,15.9-35.6,35.6-35.6h423.9
+						c19.6,0,35.6,15.9,35.6,35.6v41.3C502.4,133.9,486.5,149.8,466.8,149.8z"/>
+					<g>
+						<path class="st1" d="M157.7,113.9l17.4-47.6h12.3l17,47.6H193l-3.3-10.1h-17.5l-3.3,10.1H157.7z M174.5,95.7h12.8l-5.4-16.8
+							c-0.2-0.6-0.4-1.2-0.5-1.6c-0.1-0.5-0.2-1.1-0.3-1.8h-0.3c-0.1,0.6-0.2,1.2-0.3,1.7s-0.3,1-0.4,1.6L174.5,95.7z"/>
+						<path class="st1" d="M239.1,109.7H239v19.8h-10.2V79.1H239v5.3h0.1c1.3-2.1,2.9-3.6,4.8-4.7s4-1.5,6.5-1.5c4.5,0,8,1.5,10.5,4.6
+							s3.7,7.3,3.7,12.7c0,5.8-1.4,10.5-4.3,14s-6.7,5.3-11.5,5.3c-2.1,0-4-0.4-5.6-1.3C241.6,112.7,240.2,111.4,239.1,109.7z
+							 M238.8,95.5v3c0,2.5,0.7,4.5,2,6.1s3.1,2.4,5.3,2.4c2.5,0,4.5-1,5.9-3s2.1-4.8,2.1-8.4c0-3.2-0.6-5.6-1.9-7.2
+							c-1.3-1.6-3.1-2.4-5.6-2.4c-2.3,0-4.2,0.9-5.7,2.6S238.8,92.7,238.8,95.5z"/>
+						<path class="st1" d="M293.6,87.6c-0.4-0.1-0.9-0.2-1.4-0.2c-0.5-0.1-1-0.1-1.5-0.1c-2.8,0-4.9,0.9-6.3,2.6
+							c-1.4,1.8-2.1,4.2-2.1,7.3v16.7h-10.2V79.1h10.2v6.5h0.1c0.8-2.4,2-4.1,3.6-5.3c1.5-1.2,3.4-1.8,5.6-1.8c0.5,0,1,0,1.5,0.1
+							s1,0.2,1.5,0.3L293.6,87.6z"/>
+						<path class="st1" d="M316.5,114.8c-5.7,0-10.2-1.6-13.5-4.9s-4.9-7.7-4.9-13.2c0-5.8,1.7-10.3,5.1-13.5c3.4-3.3,8-4.9,13.9-4.9
+							c5.7,0,10.2,1.6,13.4,4.9c3.3,3.2,4.9,7.6,4.9,13c0,5.7-1.7,10.3-5.1,13.7C326.9,113.1,322.3,114.8,316.5,114.8z M316.9,106.9
+							c2.7,0,4.7-0.9,6.1-2.7c1.3-1.8,2-4.5,2-8c0-3.4-0.7-5.9-2-7.6c-1.4-1.7-3.4-2.6-6.1-2.6s-4.7,0.9-6.2,2.8
+							c-1.5,1.8-2.2,4.4-2.2,7.7c0,3.5,0.7,6.1,2.1,7.8C311.9,106.1,314,106.9,316.9,106.9z"/>
+						<path class="st1" d="M353.2,109.7h-0.1v19.8h-10.2V79.1h10.2v5.3h0.1c1.3-2.1,2.9-3.6,4.8-4.7s4-1.5,6.5-1.5c4.5,0,8,1.5,10.5,4.6
+							s3.7,7.3,3.7,12.7c0,5.8-1.4,10.5-4.3,14s-6.7,5.3-11.5,5.3c-2.1,0-4-0.4-5.6-1.3C355.7,112.7,354.3,111.4,353.2,109.7z
+							 M352.9,95.5v3c0,2.5,0.7,4.5,2,6.1s3.1,2.4,5.3,2.4c2.5,0,4.5-1,5.9-3s2.1-4.8,2.1-8.4c0-3.2-0.6-5.6-1.9-7.2s-3.1-2.4-5.6-2.4
+							c-2.3,0-4.2,0.9-5.7,2.6S352.9,92.7,352.9,95.5z"/>
+						<path class="st1" d="M402.7,114.8c-5.7,0-10.2-1.6-13.5-4.9s-4.9-7.7-4.9-13.2c0-5.8,1.7-10.3,5.1-13.5c3.4-3.3,8-4.9,13.9-4.9
+							c5.7,0,10.2,1.6,13.4,4.9c3.3,3.2,4.9,7.6,4.9,13c0,5.7-1.7,10.3-5.1,13.7C413.1,113.1,408.5,114.8,402.7,114.8z M403.1,106.9
+							c2.7,0,4.7-0.9,6.1-2.7c1.3-1.8,2-4.5,2-8c0-3.4-0.7-5.9-2-7.6c-1.4-1.7-3.4-2.6-6.1-2.6s-4.7,0.9-6.2,2.8
+							c-1.5,1.8-2.2,4.4-2.2,7.7c0,3.5,0.7,6.1,2.1,7.8C398.1,106.1,400.2,106.9,403.1,106.9z"/>
+						<path class="st1" d="M425.8,111l4.2-6.8c1.2,0.9,2.6,1.7,4.2,2.3c1.6,0.6,3.4,0.9,5.3,0.9c1.5,0,2.7-0.3,3.6-0.8s1.4-1.4,1.4-2.5
+							c0-0.9-0.4-1.6-1.1-2.1s-2.1-1-4.1-1.4c-4.3-0.9-7.4-2.2-9.3-3.9c-1.9-1.7-2.8-4-2.8-7c0-3.5,1.4-6.3,4.2-8.4
+							c2.8-2.1,6.2-3.1,10.2-3.1c2.1,0,4.1,0.3,5.9,0.8c1.9,0.5,3.6,1.3,5.3,2.4L449,88c-1.4-0.9-2.7-1.5-4-1.9c-1.2-0.4-2.5-0.6-3.8-0.6
+							c-1.5,0-2.7,0.3-3.6,0.9s-1.4,1.3-1.4,2.2c0,1,0.4,1.7,1.2,2.2c0.8,0.5,2.4,1,4.8,1.4c4,0.8,6.9,2.1,8.6,3.8c1.8,1.7,2.6,4.1,2.6,7
+							c0,3.5-1.3,6.3-4,8.5c-2.7,2.1-6.2,3.2-10.5,3.2c-2.4,0-4.7-0.3-6.9-0.9C430.1,113.2,428,112.3,425.8,111z"/>
+					</g>
+					<path class="st2" d="M466.8,149.8H42.9c-19.6,0-35.6-15.9-35.6-35.6V72.9c0-19.6,15.9-35.6,35.6-35.6h423.9
+						c19.6,0,35.6,15.9,35.6,35.6v41.3C502.4,133.9,486.5,149.8,466.8,149.8z"/>
+					<g>
+						<path class="st3" d="M80.1,166V78.5H57.9V57.8H121V166H80.1z M98.5,7c6.5,0,12.1,2.3,16.7,6.9s6.9,10.2,6.9,16.7
+							s-2.3,12.1-6.9,16.7s-10.2,6.9-16.7,6.9s-12.1-2.3-16.7-6.9s-6.9-10.2-6.9-16.7s2.3-12.1,6.9-16.7S92,7,98.5,7z"/>
+					</g>
+					<g>
+						<path class="st1" d="M177.3,53.8l8.5,9.3h-6.1l-11.8-9.3H177.3z"/>
+					</g>
+					</svg>
+		</button>
+		
+		
+		
+		
+	</div>
+	
+	<dic id="containAbout">
+		<div id="about">
+			<div class="scrollable-content">
+			<p>Cet outil cartographique fournit une visualisation interactive des homicides commis en France
+				entre 2019 et 2021. Il permet de décrire leur répartition spatiale à différentes échelles selon le
+				niveau de zoom.</p>
+
+			<p>Les informations présentées proviennent des données opérationnelles collectées par la CRAC,
+				rattachée à la Sous-direction de la lutte contre la criminalité organisée et de la délinquance
+				spécialisée. De nombreuses sources d’informations opérationnelles ont été mobilisées afin de
+				détailler et géolocaliser les homicides de façon très précise.</p>
+
+			<p>Cet atlas interactif permet la visualisation de chiffres-clés et de graphiques dynamiques selon
+				des critères spécifiques qu’il est possible de filtrer et de croiser entre eux (année, mode
+				opératoire, sexe de la victime…).</p>
+
+			<p>Les homicides sont identifiés par des points et, en sélectionnant directement l'un d'eux, un
+				descriptif précis s'ouvre, offrant des détails sur l'événement concerné.</p>
+
+ 			<p>La carte peut etre affichée sous deux échelles : les départements ou les DZPJ.</p>
+
+			<p>Pour effectuer des sélections multiples de départements ou de DZPJ, appuyez sur « Ctrl » et cliquez sur les
+				différents départements/DZPJ ou sélectionnez-les via le filtre « Département » ou « DZPJ ».</p>
+
+			
+			
+			<img id="presentation" src="explication_carte_interactive.png" style="width: 95%; height: auto;">
+			
+			<div style="border-top: 2px solid rgb(194, 194, 194); margin: 10px 0;">
+				<p>Exemple d'utilisation :</p>
+			</div>
+			<img id="exemple" src="exemple_carte_interactive.png" style="width: 95%; height: auto;">
+			</div>
+			<span id="closeAbout" class="closeAbout">&times;</span>
+		</div>
+	</dic>	
+
+	<div id="containerFiltre">
+		<div class="filtre-container">
+		<div class="center-text"><h2><strong>Filtres</strong></h2></div>
+		<div class="filtre"><h4>Département</h4>
+			<select id="selectDep" class="select-multiple" name="dep_comm[]" multiple="multiple">
+		  </select>
+		</div>
+		<div class="filtre"><h4>DZPN</h4>
+			<select id="selectDZPN" class="select-multiple" name="dzpn_comm[]" multiple="multiple">
+		  </select>
+		</div>
+		<div class="filtre"><h4>Année</h4>
+			<select class="select-multiple" name="annee_comm[]" multiple="multiple">
+				<option value="2019">2019</option>
+				<option value="2020">2020</option>
+				<option value="2021">2021</option>
+		  </select>
+		</div>
+		<div class="filtre"><h4>Zone de compétence</h4>
+			<select class="select-multiple" name="zone_competence[]" multiple="multiple">
+				<option value="PN">Police Nationale</option>
+				<option value="GN">Gendarmerie Nationale</option>
+		  </select>
+		</div>
+		<div class="filtre"><h4>Résolution</h4>
+			<select class="select-multiple" name="resolution[]" multiple="multiple">
+				<option value="Élucidé">Résolu</option>
+				<option value="Non élucidé">Non résolu</option>
+		  </select>
+		</div>
+		<div class="filtre"><h4>Sexe des victimes</h4>
+			<select class="select-multiple" name="sexe_vict[]" multiple="multiple">
+				<option value="Femme">Femme</option>
+				<option value="Homme">Homme</option>
+		  </select>
+		</div>
+		<div class="filtre"><h4>Victimes mineures</h4>
+			<select class="select-multiple" name="mineure_vict[]" multiple="multiple">
+				<option value="Mineur">Mineure</option>
+				<option value="Majeur">Majeure</option>
+			</select>
+				<h4>Type d'homicide <span class="info-icon" id="defTypeHom" data-definition="<p>Les<strong>&nbsp;homicides au sein du couple :&nbsp;</strong>sont commis &agrave; l&rsquo;encontre d&rsquo;un partenaire de vie actuel ou pass&eacute;. Cette d&eacute;finition inclut les morts violentes &agrave; l&rsquo;encontre de partenaires dits &laquo; non officiels &raquo;.</p>
+					<p>Les<strong>&nbsp;homicides familiaux hors couple</strong> : sont commis entre autres membres de la famille. Ils englobent diff&eacute;rents types de lien de parent&eacute; : &nbsp;homicides par ascendants ou descendants (parricide ou matricide et infanticides ou n&eacute;onaticides), fratricides, meurtres de grands-parents ou de petits enfants, ou encore des homicides de personnes li&eacute;es familialement &agrave; l&rsquo;auteur par alliance (beau-fr&egrave;re, beau-p&egrave;re, etc.).</p>
+					<p>Les <strong>homicides li&eacute;s &agrave; une altercation</strong> : opposent des protagonistes sans lien familial ou de couple. Ils comprennent les querelles, rixes entre connaissances ou inconnus ayant par exemple pour origine la r&eacute;solution d&rsquo;un conflit. Ils comprennent aussi bien les homicides dont le mobile peut &ecirc;tre une vengeance que les homicides pour diff&eacute;rends financiers ou de voisinage. Ces homicides peuvent &eacute;galement r&eacute;sulter de disputes, de diff&eacute;rends ant&eacute;rieurs, d&rsquo;actes al&eacute;atoires, voire pr&eacute;c&eacute;d&eacute;s de provocations.</p>
+					<p>Les <strong>agressions</strong>, contrairement aux altercations, n&lsquo;opposent pas deux protagonistes. La victime, qui ne riposte pas, est agress&eacute;e&nbsp;: il n&rsquo;y a pas de dispute ou de violences (physiques ou verbales) duales.</p>
+					<p>Les <strong>homicides li&eacute;s &agrave; des conflits entre malfaiteurs</strong> se d&eacute;finissent par trois crit&egrave;res :</p>
+					<ul>
+						<li>un mode op&eacute;ratoire pr&eacute;sentant un certain degr&eacute; d&rsquo;&eacute;laboration (ciblage sp&eacute;cifique de la victime ou d&rsquo;un groupe sp&eacute;cifique (par opposition &agrave; des homicides d&rsquo;opportunit&eacute;), utilisation d&rsquo;arme &agrave; feu et/ou de techniques utilis&eacute;es par la criminalit&eacute; organis&eacute;e (actes pr&eacute;paratoires tels que les rep&eacute;rages pr&eacute;alables, usage de syst&egrave;mes &nbsp;de g&eacute;olocalisation sur le v&eacute;hicule de la victime, de v&eacute;hicules vol&eacute;s, destruction du v&eacute;hicule, commission de l&rsquo;acte en bande organis&eacute;e, fuite en v&eacute;hicule rapide, acte organis&eacute; par plusieurs individus, etc.) ;</li>
+						<li>caract&eacute;ristiques des antagonistes&nbsp;: la victime et/ou le mis en cause sont li&eacute;s au grand banditisme ou sont impliqu&eacute;s dans des activit&eacute;s illicites (trafic de stup&eacute;fiants, trafic d&rsquo;&ecirc;tre humain, trafic d&rsquo;armes, prox&eacute;n&eacute;tisme, vol &agrave; main arm&eacute;e, blanchiment, etc.)&nbsp;;</li>
+						<li>mobile : il doit &ecirc;tre li&eacute; &agrave; des activit&eacute;s ill&eacute;gales. Ce crit&egrave;re exclut de fait tout acte dont le mobile serait li&eacute; &agrave; des conflits d&rsquo;ordre priv&eacute;.</li>
+					</ul>
+					<p>Les <strong>homicides crapuleux</strong> : sont motiv&eacute;s par le fait de voler les biens de la victime ou r&eacute;sultent de dettes li&eacute;es &agrave; des activit&eacute;s ill&eacute;gales (ex. trafic ou consommation de stup&eacute;fiants).</p>
+					<p>&nbsp;</p>
+					<p>Les <strong>homicides li&eacute;s &agrave; des bandes rivales</strong> renvoient &agrave; des conflits territoriaux, &agrave; un ancrage populaire et &agrave; un milieu socio-&eacute;conomique d&eacute;favoris&eacute;. Les protagonistes sont relativement jeunes et s&rsquo;affrontent dans un contexte de rivalit&eacute;s g&eacute;ographiques.</p>
+					<p>Les <strong>homicides sexuels</strong> remplissent au moins l&rsquo;un des six crit&egrave;res suivants :</p>
+					<ul>
+						<li>victime retrouv&eacute;e nue ou partiellement nue ;</li>
+						<li>parties g&eacute;nitales de la victime expos&eacute;es ;</li>
+						<li>corps de la victime positionn&eacute; de mani&egrave;re partiellement explicite ;</li>
+						<li>un objet est ins&eacute;r&eacute; dans l&rsquo;une des cavit&eacute;s du corps de la victime ;</li>
+						<li>preuve d&rsquo;acte sexuel en &eacute;vidence ;</li>
+						<li>pr&eacute;sence d&rsquo;&eacute;l&eacute;ments sugg&eacute;rant des fantaisies sadiques (mutilation d&rsquo;organes g&eacute;nitaux ou activit&eacute;s sexuelles de substitution).</li>
+					</ul>" 
+				style="cursor:pointer;">ⓘ</span></h4>
+			<select class="select-multiple" name="type_hom[]" multiple="multiple">
+				<option value="Homicide dans le couple">Homicide dans le couple</option>
+				<option value="Homicide familial hors couple">Homicide familial hors couple</option>
+				<option value="Homicide lié à une altercation">Homicide lié à une altercation</option>
+				<option value="Homicide lié à des conflits entre malfaiteurs">Homicide lié à des conflits entre malfaiteurs</option>
+				<option value="Homicide crapuleux">Homicide crapuleux</option>
+				<option value="Homicide lié à des bandes rivales">Homicide lié à des bandes rivales</option>
+				<option value="Agression">Agression</option>
+				<option value="Acte de terrorisme">Acte de terrorisme</option>
+				<option value="Homicide sexuel">Homicide sexuel</option>
+				<option value="Non caractérisable">Non caractérisable</option>
+				<option value="Autre type d'homicide">Autre</option>
+		  </select>
+		</div>
+		<div class="filtre"><h4>Mode opératoire</h4>
+			<select class="select-multiple" name="arme_procede[]" multiple="multiple">
+				<option value="Arme à feu">Arme à feu</option>
+				<option value="Couteau">Arme blanche</option>
+				<option value="Autre type d'arme">Autre type d'arme</option>
+				<option value="Coups et violence">Coups et violence</option>
+				<option value="Empoisonnement / Intoxication">Empoisonnement</option>
+				<option value="Crémation">Crémation</option>
+				<option value="Délaissement / Privation de soins">Délaissement</option>
+				<option value="Noyade">Noyade</option>
+		  </select>
+		</div>
+		<div class="filtre"><h4>Type de lieu</h4>
+			<select class="select-multiple" name="type_lieu[]" multiple="multiple">
+				<option value="Lieu d'habitation">Lieu d'habitation</option>
+				<option value="Voie publique">Voie publique</option>
+				<option value="Autre lieu">Autre</option>
+		  </select>
+		</div>
+		<div class="filtre"><h4>Interconnaissance</h4>
+			<select class="select-multiple" name="interconnaissance[]" multiple="multiple">
+				<option value="interconnaissance">Victime et MEC se connaissent</option>
+				<option value="pas interconnaissance">Victime et MEC ne se connaissent pas</option>
+				<option value="lien inconnu">Lien inconnu</option>
+		  </select>
+		</div>
+	</div>
+		
+		
+		<div class="filtre filtre-boutons">
+			<button class="filtre-button" id="reinitialiserFiltres"><strong>Réinitialiser</strong></button>
+		</div>
+	</div>
+	
+
+<!-- DIV qui contient la carte -->
+	<div id="mapid"></div>
+
+	<!-- DIV qui contient les histogrames -->
+	<div id="containerHist"> 
+		<div id="hist5" class="boxHist">
+			<div id="nbreHom"></div>
+			<canvas id="hist5_canvas"></canvas>
+		</div>
+		<div id="hist4" class="boxHist">
+			<canvas id="hist4_canvas"></canvas>
+		</div>
+		<div id="hist2" class="boxHist">
+				<canvas id="hist2_canvas"></canvas>
+			</div>
+		<div id="hist3" class="boxHist">
+			<canvas id="hist3_canvas"></canvas>
+		</div>
+		
+	</div>
+
+<!--Popup de définiution des termes-->
+	<div id="def-overlay" class="def-overlay hidden">
+		<div id="def-content" class="def-content">
+			<span id="def-close" class="def-close">&times;</span>
+			<p id="def-text"></p>
+		</div>
+	</div>
+
+
+
+
+
+<!-- fichier javascript externe qui paramètre le contenu de la carte Leaflet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="index.js"></script>
+<script src="https://cdn.rawgit.com/Leaflet/Leaflet.heat/gh-pages/dist/leaflet-heat.js"></script>
+<script src="Carte.js"></script>
+<script src="fonction_leaflet.js"></script>
+<script src="histogramme.js"></script>
+
+
+		
+</body>
+</html>
